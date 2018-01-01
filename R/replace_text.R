@@ -23,7 +23,7 @@ search_text <- function(x, from) {
 }
 
 #' @export
-replace_text <- function(dir, from, to) {
+replace_text <- function(dir = "./", from, to) {
     # Stop if from and to lengths don't match
     stopifnot(length(from) == length(to) | length(to) == 1)
     # Get all .R .Rmd and README file names
