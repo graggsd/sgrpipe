@@ -1,5 +1,5 @@
 test
 
-Orange -> Orange
-Orange -> Orange
+Apple -> Orange
+Pear -> Orange
 Bear -> Bear
