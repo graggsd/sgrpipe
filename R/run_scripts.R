@@ -17,5 +17,6 @@ run_Rmd <- function(x,
                       output_file = output_file,
                       output_format = output_format,
                       ...)
+    rm(list = ls())
 
 }
