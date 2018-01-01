@@ -10,5 +10,6 @@ License: What license is it under?
 Encoding: UTF-8
 LazyData: true
 Imports: dplyr,
-    magrittr
+    magrittr,
+    rmarkdown
 RoxygenNote: 6.0.1
