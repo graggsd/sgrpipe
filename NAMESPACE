@@ -3,4 +3,5 @@
 export(replace_text)
 export(run_R)
 export(run_Rmd)
+export(search_text)
 importFrom(magrittr,"%>%")

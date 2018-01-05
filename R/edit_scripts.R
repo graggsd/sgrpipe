@@ -39,3 +39,17 @@ replace_text <- function(dir = "./", from, to) {
         }
     }
 }
+
+#' @export
+search_text <- function(dir = "./", pattern) {
+    # Get all .R .Rmd and README file names
+    files <- get_file_names(dir)
+    for(file in files) {
+        # For each file, read line by line
+        tx <- readLines(paste0(dir, file))
+        # Print file name if pattern is located within
+        if (search_text(tx, from)) {
+            print(file)
+        }
+    }
+}
