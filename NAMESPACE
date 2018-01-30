@@ -2,4 +2,4 @@
 
 export(replace_text)
 export(run_R)
-importFrom(magrittr,"%>%")
+export(write_xlsx)
