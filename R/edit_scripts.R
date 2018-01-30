@@ -1,6 +1,6 @@
 get_file_names <- function(dir) {
     files <- list.files(dir)
-    return(grep("\\.R$|\\.Rmd$|README", files, value = TRUE))
+    return(grep("\\.R$|\\.Rmd$", files, value = TRUE))
 }
 
 replace_regex_text <- function (x, from, to) {
@@ -22,8 +22,20 @@ search_text <- function(x, from) {
     return(sum(sapply(from, grepl, x)) > 0)
 }
 
+#' Replaces text from all \code{.R} and \code{.Rmd} files within a given
+#' directory
+#'
+#' This function takes a series of regular expression in \code{from} and changes
+#' them to the values in \code{to} for all \code{.R} and \code{.Rmd} files
+#' in the directory \code{dir}.
+#'
+#' @param from one or more regexes to substitute
+#' @param to one or values that will substitute for regexes in \code{from}
+#'
+#' @return NULL
+#'
 #' @export
-replace_text <- function(dir = "./", from, to) {
+replace_text <- function(from, to, dir = "./") {
     # Stop if from and to lengths don't match
     stopifnot(length(from) == length(to) | length(to) == 1)
     # Get all .R .Rmd and README file names
