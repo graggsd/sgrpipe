@@ -24,6 +24,30 @@ rm_globals <- function() {
     rm(list = x, pos = ".GlobalEnv")
 }
 
+# From:
+# https://stackoverflow.com/questions/7505547/detach-all-packages-while-working-in-r
+
+#' @export
+detachAllPackages <- function() {
+
+    basic.packages <- c("package:stats", "package:graphics",
+                        "package:grDevices", "package:utils",
+                        "package:datasets","package:methods",
+                        "package:base", "package:sgrpipe")
+
+    package.list <-
+        search()[ifelse(unlist(gregexpr("package:", search())) == 1,
+                        TRUE,
+                        FALSE)]
+
+    package.list <- setdiff(package.list, basic.packages)
+
+    if (length(package.list) > 0)  {
+        for (package in package.list) detach(package, character.only = TRUE)
+    }
+
+}
+
 #' Launches scripts from \code{.R} or \code{.Rmd} files
 #'
 #' Depending on the type of file, the function will source code from a \code{.R}
@@ -57,6 +81,8 @@ run_R <- function(x,
                    output_format = output_format,
                    ...)
     }
+
+    detachAllPackages()
 
 }
 
