@@ -1,6 +1,5 @@
 run_dotR <- function(x) {
     source(x)
-    rm_globals()
 }
 
 run_dotRmd <- function(x,
@@ -15,7 +14,6 @@ run_dotRmd <- function(x,
                       output_file = output_file,
                       output_format = output_format,
                       ...)
-    rm_globals()
 }
 
 # Helper function to clean environment
@@ -26,8 +24,6 @@ rm_globals <- function() {
 
 # From:
 # https://stackoverflow.com/questions/7505547/detach-all-packages-while-working-in-r
-
-#' @export
 detachAllPackages <- function() {
 
     basic.packages <- c("package:stats", "package:graphics",
@@ -46,6 +42,12 @@ detachAllPackages <- function() {
         for (package in package.list) detach(package, character.only = TRUE)
     }
 
+}
+
+#' @export
+clear_workspace <- function(){
+    detachAllPackages()
+    rm_globals()
 }
 
 #' Launches scripts from \code{.R} or \code{.Rmd} files
@@ -72,6 +74,10 @@ run_R <- function(x,
                   output_format = "html_document",
                   ...) {
 
+    # Remove globals and detach non-base packages before launching the
+    # script
+    clear_workspace()
+
     if (grepl("\\.R$", x)) {
         run_dotR(x = x)
     } else if (grepl("\\.Rmd", x)) {
@@ -82,7 +88,9 @@ run_R <- function(x,
                    ...)
     }
 
-    detachAllPackages()
+    # Remove globals and detach non-base packages before launching the
+    # script
+    clear_workspace()
 
 }
 
